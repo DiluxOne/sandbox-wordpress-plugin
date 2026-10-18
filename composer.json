@@ -1,0 +1,21 @@
+{
+    "name": "diluxone/sandbox-wordpress-plugin",
+    "description": "DiluxOne Sandbox: a toy plugin where the shared workflows are proved end to end. Development tooling only.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
