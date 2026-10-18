@@ -11,11 +11,12 @@ defined( 'ABSPATH' ) || exit;
  * The [dxsb_greet name="..."] shortcode: the greeting for that name.
  *
  * @param array|string $atts The shortcode's attributes.
- * @return string The greeting, already escaped.
+ * @return string The greeting.
  */
 function dxsb_greet_shortcode( $atts ) {
 	$atts = shortcode_atts( array( 'name' => '' ), $atts, 'dxsb_greet' );
-	return dxsb_greeting( $atts['name'] );
+	/* translators: %s: who is greeted. */
+	return sprintf( __( 'Hello, %s!', 'diluxone-sandbox' ), $atts['name'] );
 }
 
 /**
