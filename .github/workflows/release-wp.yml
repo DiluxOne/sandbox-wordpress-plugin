@@ -62,8 +62,8 @@ permissions:
 jobs:
   release:
     if: github.event_name == 'push'
-    # At `v5`, never a pinned commit: see the header.
-    uses: DiluxOne/.github/.github/workflows/plugin-release-wp.yml@rc-v5
+    # At `v6`, never a pinned commit: see the header.
+    uses: DiluxOne/.github/.github/workflows/plugin-release-wp.yml@v6
     with:
       slug: diluxone-sandbox
       version-constant: DILUXONE_SANDBOX_VERSION
@@ -72,7 +72,7 @@ jobs:
 
   publish:
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
-    uses: DiluxOne/.github/.github/workflows/plugin-publish-wp.yml@rc-v5
+    uses: DiluxOne/.github/.github/workflows/plugin-publish-wp.yml@v6
     with:
       slug: diluxone-sandbox
       tag: ${{ inputs.tag || '' }}
