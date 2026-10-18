@@ -1,0 +1,80 @@
+name: Release
+
+# Releases this plugin through the shared workflows in DiluxOne/.github, then
+# publishes it to wordpress.org: the release ends at the GitHub release (the
+# tag, the notes and the plugin's zip, #287), and the `publish` job, on that
+# release's publishing, sends that very zip to wordpress.org
+# (plugin-publish-wp.yml). On every push to main the workflow computes the next
+# version from the type:* labels of what merged. A release is a person's
+# decision (DiluxOne/.github#82): a maintainer opens the issue "Release
+# X.Y.Z" (the Release form) and accepts it, which opens the release pull
+# request (the `Unreleased.` line removed and the version markers set, with
+# scripts/release-markers.sh prepare). Once it merges, this workflow checks
+# that a person accepted that issue and that its title still names the
+# version (that is what the `issues: read` below is for), then tags and
+# creates the release, which the `publish` job sends to wordpress.org. Without an accepted release issue, the
+# environment's required reviewers approve instead, if it has any (that is
+# what the `actions: read` is for, and a private repository below GitHub
+# Enterprise cannot have them); without either, nothing is released. A tag X.Y.Z
+# an administrator pushes by hand goes through the same job, and must be the
+# version the labels say is next. While the readme's newest changelog entry
+# starts with the line `Unreleased.` nothing is released: the notes under it
+# are written as the changes merge. Every push to main also publishes a
+# development build (the shipped tree stamped <next>-dev.<N>) as the one
+# "Development build" pre-release on the moving tag `dev`, replaced each
+# time. Fill in slug and version-constant: the release pull request reads
+# them from here.
+#
+# The environment holds the SVN credentials and the release App's key
+# (DILUX_RELEASE_PRIVATE_KEY, with the variable DILUX_RELEASE_CLIENT_ID).
+# A called workflow only sees the secrets its caller hands over, and an
+# environment's secrets can only be handed over with `secrets: inherit`
+# (verified: passed by name, SVN_USERNAME arrived empty), which passes every
+# repository and organisation secret too. That is why
+# this workflow runs only on main, X.Y.Z tags and security/X.Y.Z branches. It calls the shared
+# workflow at `v5`, like every other workflow here: `v5` is a protected ref
+# of DiluxOne/.github that only an administrator moves, so nothing pinned
+# is needed, and nothing is pinned in any repository (DiluxOne/.github#136).
+
+on:
+  push:
+    # security/X.Y.Z: a security patch on the version in production, pushed
+    # by dilux-security once a maintainer approved it in the private
+    # repository (DiluxOne/.github#247, #287).
+    branches: [$default-branch, 'security/[0-9]+.[0-9]+.[0-9]+']
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+  # The release, published: where the plugin goes next (#287).
+  release:
+    types: [published]
+  # Publish a release again by hand (after a failure), by its tag.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The release to publish to wordpress.org again (X.Y.Z).
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: read # the labels of what merged decide the version
+  issues: read # the release issue a person accepted, the approval
+  actions: read # the environment's protection rules, and the runs still waiting
+
+jobs:
+  release:
+    if: github.event_name == 'push'
+    # At `v5`, never a pinned commit: see the header.
+    uses: DiluxOne/.github/.github/workflows/plugin-release-wp.yml@rc-v5
+    with:
+      slug: diluxone-sandbox
+      version-constant: DILUXONE_SANDBOX_VERSION
+      dry-run: true # rehearse first: everything but the tag and the release
+    secrets: inherit
+
+  publish:
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    uses: DiluxOne/.github/.github/workflows/plugin-publish-wp.yml@rc-v5
+    with:
+      slug: diluxone-sandbox
+      tag: ${{ inputs.tag || '' }}
+      dry-run: true # the sandbox is on no SVN: a rehearsal of the publishing
+    secrets: inherit
