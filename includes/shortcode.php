@@ -15,8 +15,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function dxsb_greet_shortcode( $atts ) {
 	$atts = shortcode_atts( array( 'name' => '' ), $atts, 'dxsb_greet' );
-	/* translators: %s: who is greeted. */
-	return sprintf( __( 'Hello, %s!', 'diluxone-sandbox' ), $atts['name'] );
+	return dxsb_greeting( $atts['name'] );
 }
 
 /**
