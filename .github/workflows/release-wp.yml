@@ -41,7 +41,7 @@ on:
     # security/X.Y.Z: a security patch on the version in production, pushed
     # by dilux-security once a maintainer approved it in the private
     # repository (DiluxOne/.github#247, #287).
-    branches: [$default-branch, 'security/[0-9]+.[0-9]+.[0-9]+']
+    branches: [main, 'security/[0-9]+.[0-9]+.[0-9]+']
     tags: ['[0-9]+.[0-9]+.[0-9]+']
   # The release, published: where the plugin goes next (#287).
   release:
