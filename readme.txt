@@ -17,6 +17,13 @@ In a post, the shortcode `[dxsb_greet name="Ada"]` shows the greeting for that n
 
 == Changelog ==
 
+= 0.2.0 =
+
+Unreleased.
+
+* The greeting can be shown in capitals.
+* The shortcode `[dxsb_greet name="Ada"]` shows the greeting in a post.
+
 = 0.1.0 =
 
 * First version.
