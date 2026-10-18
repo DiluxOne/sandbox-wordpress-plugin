@@ -27,6 +27,15 @@ class GreetingTest extends TestCase {
 		$this->assertSame( 'Hello, friend!', dxsb_greeting( '  ' ) );
 	}
 
+	public function test_it_greets_in_capitals_when_asked() {
+		$this->assertSame( 'HELLO, ADA!', dxsb_greeting( 'Ada', true ) );
+	}
+
+	public function test_it_greets_as_before_when_capitals_are_not_asked() {
+		$this->assertSame( 'Hello, Ada!', dxsb_greeting( 'Ada' ) );
+		$this->assertSame( 'Hello, Ada!', dxsb_greeting( 'Ada', false ) );
+	}
+
 	public function test_it_counts_words() {
 		$this->assertSame( 3, dxsb_word_count( 'one two  three' ) );
 	}
