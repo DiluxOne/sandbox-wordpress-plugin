@@ -67,7 +67,7 @@ jobs:
     with:
       slug: diluxone-sandbox
       version-constant: DILUXONE_SANDBOX_VERSION
-      dry-run: true # rehearse first: everything but the tag and the release
+      dry-run: false
     secrets: inherit
 
   publish:
