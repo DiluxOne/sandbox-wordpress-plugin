@@ -40,6 +40,13 @@ class ShortcodeTest extends TestCase {
 		);
 	}
 
+	public function test_the_shortcode_leaves_no_markup_from_the_name() {
+		$this->assertSame(
+			'Hello, &lt;img src=x onerror=alert(document.cookie)&gt;!',
+			dxsb_greet_shortcode( array( 'name' => '<img src=x onerror=alert(document.cookie)>' ) )
+		);
+	}
+
 	public function test_the_registration_adds_the_shortcode() {
 		Functions\expect( 'add_shortcode' )
 			->once()
