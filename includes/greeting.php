@@ -29,6 +29,6 @@ function dxsb_greeting( $name ) {
  * @return int
  */
 function dxsb_word_count( $text ) {
-	$words = preg_split( '/\s+/', trim( (string) $text ) );
+	$words = preg_split( '/\s+/', trim( (string) $text ), -1, PREG_SPLIT_NO_EMPTY );
 	return count( $words );
 }
