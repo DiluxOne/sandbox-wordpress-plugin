@@ -1,5 +1,0 @@
-# This repository's policy over the organisation's (DiluxOne/.github,
-# policy/autonomy.yml): it can only lower what the organisation allows.
-# The work budget is lowered so a run hits it (DiluxOne/.github#247).
-budgets-usd:
-  autopilot-work: 0.05
