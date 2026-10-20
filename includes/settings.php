@@ -22,8 +22,8 @@ function dxsb_save_name() {
 }
 
 /**
- * Deletes the greeting's name when an admin page is loaded with
- * ?dxsb_reset=1.
+ * Deletes the greeting's name when an administrator loads an admin page
+ * with ?dxsb_reset=1 and a valid 'dxsb_reset_name' nonce.
  *
  * @return bool Whether it was deleted.
  */
@@ -31,6 +31,10 @@ function dxsb_reset_name() {
 	if ( empty( $_GET['dxsb_reset'] ) ) {
 		return false;
 	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return false;
+	}
+	check_admin_referer( 'dxsb_reset_name' );
 	return delete_option( 'dxsb_name' );
 }
 
