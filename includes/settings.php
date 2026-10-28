@@ -38,4 +38,5 @@ function dxsb_reset_name() {
 	return delete_option( 'dxsb_name' );
 }
 
+add_action( 'admin_post_dxsb_save_name', 'dxsb_save_name' );
 add_action( 'admin_init', 'dxsb_reset_name' );
