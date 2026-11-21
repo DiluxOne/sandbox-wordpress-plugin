@@ -1,0 +1,10 @@
+{
+  "kind": "merge-decision",
+  "pull_request": 69,
+  "decided": "policy",
+  "rule": "policy/autonomy.yml#lanes.bugfix-reproduced.merge",
+  "head": "5cc35d49960c14f3ab8e45b1ef99346468f042ff",
+  "policy": "DiluxOne/.github@8ca693918fd99d0e215d492c6bc1952946cd732a",
+  "at": "2026-11-21T03:48:09Z",
+  "run": "https://github.com/DiluxOne/sandbox-wordpress-plugin/actions/runs/44862812860"
+}
