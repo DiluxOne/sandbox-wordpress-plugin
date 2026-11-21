@@ -1,0 +1,33 @@
+{
+  "kind": "merge-receipt",
+  "issue": 68,
+  "at": "2026-11-21T03:48:55Z",
+  "prd_sha256": "4bfd84b69a0b8c280ff53fd9a19f9de33be25a8c6dbf750d7c324e2a05e64bfc",
+  "prd_matches_seal": true,
+  "spec_sha256": "df464cf5c665b9b68636fa64173187163700efafd74e55f49569d4f723e91ca8",
+  "accepted_by": "policy (lane bugfix-reproduced)",
+  "pull_request": 69,
+  "head_commit": "5cc35d49960c14f3ab8e45b1ef99346468f042ff",
+  "merge_commit": "33ae36af51bcc3227295048a984eed8c8de76ee4",
+  "merged_by": "policy",
+  "lane": "bugfix-reproduced",
+  "lane_rule": "policy/autonomy.yml#lanes.bugfix-reproduced",
+  "lane_policy": "DiluxOne/.github@8ca693918fd9",
+  "accepted_at": "2026-11-21T03:41:50Z",
+  "merged_rule": "policy/autonomy.yml#lanes.bugfix-reproduced.merge",
+  "merged_policy": "DiluxOne/.github@8ca693918fd99d0e215d492c6bc1952946cd732a",
+  "review": {
+    "risk": "medium",
+    "complexity": "low",
+    "type": "fix"
+  },
+  "checks": {
+    "cancelled": 1,
+    "skipped": 9,
+    "success": 14
+  },
+  "criteria": [
+    "C1"
+  ],
+  "policy": "DiluxOne/.github@8ca693918fd9"
+}
