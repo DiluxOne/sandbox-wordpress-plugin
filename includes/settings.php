@@ -8,9 +8,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Saves the greeting's name, from the settings form.
+ * Saves the greeting's name, from the settings form, then sends the
+ * administrator back to the page the form was posted from.
  *
- * @return bool Whether it was saved.
+ * @return false|void False for a user who cannot manage options; on a save,
+ *                    it redirects and exits instead of returning.
  */
 function dxsb_save_name() {
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -18,7 +20,14 @@ function dxsb_save_name() {
 	}
 	check_admin_referer( 'dxsb_save_name' );
 	$name = isset( $_POST['dxsb_name'] ) ? sanitize_text_field( wp_unslash( $_POST['dxsb_name'] ) ) : '';
-	return update_option( 'dxsb_name', $name );
+	update_option( 'dxsb_name', $name );
+
+	$url = wp_get_referer();
+	if ( ! $url ) {
+		$url = admin_url( 'options-general.php' );
+	}
+	wp_safe_redirect( add_query_arg( 'settings-updated', 'true', $url ) );
+	exit;
 }
 
 /**
