@@ -1,0 +1,16 @@
+{
+  "kind": "lane-decision",
+  "issue": 68,
+  "lane": "bugfix-reproduced",
+  "decided_by": "policy",
+  "decided": "policy",
+  "rule": "policy/autonomy.yml#lanes.bugfix-reproduced",
+  "policy": "DiluxOne/.github@8ca693918fd9",
+  "at": "2026-11-21T03:41:50Z",
+  "run": "https://github.com/DiluxOne/sandbox-wordpress-plugin/actions/runs/44862272480",
+  "evidence": {
+    "why": "accepted by policy: lane bugfix-reproduced, opened by run 44862272480",
+    "report": 67,
+    "run": "https://github.com/DiluxOne/sandbox-wordpress-plugin/actions/runs/44862272480"
+  }
+}
