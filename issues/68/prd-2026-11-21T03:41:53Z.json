@@ -1,0 +1,9 @@
+{
+  "kind": "prd-seal",
+  "issue": 68,
+  "prd_sha256": "4bfd84b69a0b8c280ff53fd9a19f9de33be25a8c6dbf750d7c324e2a05e64bfc",
+  "prd": "### Problem\n\nThe report in #67 describes a defect, and the reproduction confirmed it: a unit test written from the report fails on the default branch at `8789f114bab97d70292190450a150053549ba999` (https://github.com/DiluxOne/sandbox-wordpress-plugin/actions/runs/44862272480).\n\nReproduction test: `tests/Unit/Repro/Issue67Test.php`, SHA-256 `b86a8ef46ee8875e62d41d2abd9c51be04375a09ca0fa93da363eaa9bbae7602`, on the branch `test/repro-issue-67`.\n\nThe test is the specification: it asserts what the report expected. It was written from an outsider's text, so it runs only in the reproduction's sandbox (no network, no environment, no secrets), never in the autopilot's working tree.\n\n### Scope\n\n- Fix the defect the reproduction test exercises, in the code it exercises.\n- Add the reproduction test to the default branch, exactly as written.\n\n### Out of scope\n\n- Changing, moving, skipping or deleting the reproduction test: it is the evidence, and gate G7 checks its SHA-256.\n- Any other behaviour the report mentions that the test does not exercise: a new issue.\n\n### Acceptance criteria\n\n- C1: Given the reproduction test tests/Unit/Repro/Issue67Test.php exactly as written, when it runs on the fix, then it passes, where it failed on 8789f114bab9.\n\n### Criticality\n\nNormal",
+  "accepted_by": "policy (lane bugfix-reproduced)",
+  "at": "2026-11-21T03:41:53Z",
+  "policy": "DiluxOne/.github@8ca693918fd9"
+}
